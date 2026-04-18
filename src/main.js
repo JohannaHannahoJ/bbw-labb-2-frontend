@@ -18,7 +18,7 @@ async function getCv() {
 
         renderCv(data); // skicka data till funktion
 
-    // skriv ut ev fel i konsoll
+        // skriv ut ev fel i konsoll
     } catch (error) {
         console.error("Error:", error);
     }
@@ -45,13 +45,28 @@ function renderCv(list) {
             <p><strong>${item.job_title}</strong></p>
             <p>${startDate} - ${endDate}</p>
             <p>${item.description}</p>
+
+            <button class="delete-btn" data-id="${item.id}">
+                Ta bort
+            </button>
+    
             <hr>
         `;
+
+        // hitta delete-knappen i DOM
+        const btn = div.querySelector(".deleteBtn");
+        // radera vid klick
+        btn.addEventListener("click", async () => {
+            await fetch(`${cvApi}/${item.id}`, {
+                method: "DELETE"
+            });
+            // uppdatera lista
+            getCv();
+        });
 
         // lägg till i DOM
         container.appendChild(div);
     });
 }
-
 // kör när sidan laddas
 getCv();
