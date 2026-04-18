@@ -54,7 +54,7 @@ function renderCv(list) {
         `;
 
         // hitta delete-knappen i DOM
-        const btn = div.querySelector(".deleteBtn");
+        const btn = div.querySelector(".delete-btn");
         // radera vid klick
         btn.addEventListener("click", async () => {
             await fetch(`${cvApi}/${item.id}`, {
