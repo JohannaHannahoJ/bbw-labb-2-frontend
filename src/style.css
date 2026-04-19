@@ -1,0 +1,153 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --text: #401625;
+    --bg: #F2C9DC;
+    --piff: #D982AB;
+    --wakeup: #D9BF41;
+    --harmony: #8E58A6;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    color: var(--text);
+    background-color: var(--bg);
+    font-family: 'Mulish', sans-serif;
+    line-height: 1.5;
+
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+main {
+    flex: 1;
+}
+
+#main-header {
+    text-align: center;
+}
+
+#main-header h1 {
+    font-size: 60px;
+    background-color: var(--piff);
+}
+
+h2{
+    margin-bottom: 1rem;
+}
+
+h3 {
+    text-decoration: underline;
+}
+
+nav {
+    background-color: var(--piff);
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    padding: 2px;
+
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+}
+
+nav a.current {
+    border-bottom: 2px solid var(--wakeup);
+    color: var(--wakeup);
+    font-size: large;
+}
+
+.date {
+    font-style: italic;
+    font-size: 80%;
+}
+
+#cv > div {
+    border-bottom: 2px solid var(--piff);
+    padding: 1rem 0;
+}
+
+#cv > div:last-child {
+    border-bottom: none;
+}
+
+form {
+    max-width: 70ch;
+    margin-top: 1rem;
+}
+
+button,
+form label,
+form input,
+form select,
+textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+button,
+form input,
+form select,
+textarea {
+    border: 1px solid var(--piff);
+    border-radius: 5px;
+    padding: 0.4rem;
+    font: inherit;
+    font-weight: 500;
+}
+
+button {
+    width: 6rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--piff);
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.delete-btn {
+    background-color: var(--wakeup);
+    border: none
+}
+
+.add-page {
+    padding-top: 4rem;
+}
+
+footer {
+    font-weight: bold;
+    font-size: 90%;
+    text-align: center;
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: var(--text);
+    color: var(--bg);
+}

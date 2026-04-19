@@ -45,15 +45,13 @@ function renderCv(list) {
         div.innerHTML = `
             <h3>${item.company_name}</h3>
             <p><strong>${item.job_title}</strong></p>
-            <p>${startDate} - ${endDate}</p>
+            <p class="date">${startDate} - ${endDate}</p>
             <p>${item.description}</p>
 
             <button class="delete-btn" data-id="${item.id}">
                 Ta bort
             </button>
-    
-            <hr>
-        `;
+            `;
 
         // hitta delete-knappen i DOM
         const btn = div.querySelector(".delete-btn");
