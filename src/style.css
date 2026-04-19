@@ -124,6 +124,12 @@ textarea {
     font-weight: 500;
 }
 
+.hint {
+    font-size: 12px;
+    color: var(--harmony);
+    display: block;
+}
+
 button {
     width: 6rem;
     padding: 0.5rem 1rem;
@@ -139,6 +145,21 @@ button {
 
 .add-page {
     padding-top: 4rem;
+}
+
+#message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+#message.success {
+    background-color: var(--harmony);
+    color: var(--bg);
+}
+
+#message.error {
+    background-color: var(--wakeup);
 }
 
 footer {

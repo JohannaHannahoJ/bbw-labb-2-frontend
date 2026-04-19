@@ -8,6 +8,20 @@ function convertDate(date) {
     return new Date(date).toLocaleDateString("sv-SE");
 }
 
+// Visa meddelanden på sidan 
+function showMessage(text, type = "success") {
+    const msg = document.getElementById("message");
+    if (!msg) return;
+
+    msg.textContent = text;
+    msg.className = type;
+
+    setTimeout(() => {
+        msg.textContent = "";
+        msg.className = "";
+    }, 3000);
+}
+
 // Hämta data
 async function getCv() {
     try {
@@ -57,11 +71,17 @@ function renderCv(list) {
         const btn = div.querySelector(".delete-btn");
         // radera vid klick
         btn.addEventListener("click", async () => {
-            await fetch(`${cvApi}/${item.id}`, {
+            const res = await fetch(`${cvApi}/${item.id}`, {
                 method: "DELETE"
             });
-            // uppdatera lista
-            getCv();
+
+            if (res.ok) {
+                showMessage("Erfarenhet borttagen");
+                // uppdatera lista
+                getCv();
+            } else {
+                showMessage("Kunde inte ta bort", "error");
+            }
         });
 
         // lägg till i DOM
@@ -73,14 +93,18 @@ function renderCv(list) {
 async function addWorkExperience(newWork) {
     try {
         // POST-anrop till API
-        await fetch(cvApi, {
+        const res = await fetch(cvApi, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newWork)
         });
 
-        document.getElementById("cvForm")?.reset(); // töm formuläret
-        alert("Erfarenhet sparad!")
+        if (res.ok) {
+            document.getElementById("cvForm")?.reset(); // töm formuläret
+            showMessage("Erfarenhet sparad!")
+        } else {
+            showMessage("Något gick fel vid sparning", "error");
+        }
 
     } catch (error) {
         // skriv ut fel i konsollen om misslyckas
@@ -107,13 +131,13 @@ if (form) {
 
         // kolla att att fält är ifyllda
         if (!newWork.company_name || !newWork.job_title || !newWork.start_date || !newWork.description) {
-            alert("Fyll i alla obligatoriska fält");
+            showMessage("Fyll i alla obligatoriska fält", "error");
             return;
         }
 
         // kolla att slutdatum inte är före starttadum
         if (newWork.end_date && newWork.end_date < newWork.start_date) {
-            alert("Slutdatum kan inte vara före startdatum");
+            showMessage("Slutdatum kan inte vara före startdatum", "error");
             return;
         }
 

@@ -29,12 +29,17 @@
 
     <main class="add-page">
         <h2>Lägg till arbete</h2>
-
-        <form id="cvForm">
+        <p id="message"></p>
+        <form id="cvForm" novalidate>
+            <small class="hint">Obligatoriskt:</small>
             <input type="text" id="company_name" placeholder="Företag" required>
+            <small class="hint">Obligatoriskt:</small>
             <input type="text" id="job_title" placeholder="Jobbtitel" required>
+            <small class="hint">Obligatoriskt:</small>
             <input type="date" id="start_date" required>
+            <small class="hint">Fyll i om avslutad:</small>
             <input type="date" id="end_date">
+            <small class="hint">Obligatoriskt:</small>
             <textarea id="description" placeholder="Beskrivning" required></textarea>
 
             <button type="submit">Lägg till</button>
