@@ -28,10 +28,16 @@
     </header>
 
     <main>
+        <h2>Lägg till arbete</h2>
 
-        <h2>Lägg till</h2>
-        <form>
-            
+        <form id="cvForm">
+            <input type="text" id="company_name" placeholder="Företag" required>
+            <input type="text" id="job_title" placeholder="Jobbtitel" required>
+            <input type="date" id="start_date" required>
+            <input type="date" id="end_date">
+            <textarea id="description" placeholder="Beskrivning" required></textarea>
+
+            <button type="submit">Lägg till</button>
         </form>
     </main>
 

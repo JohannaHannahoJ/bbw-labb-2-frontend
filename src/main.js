@@ -28,6 +28,8 @@ async function getCv() {
 function renderCv(list) {
     const container = document.getElementById("cv");
 
+    if (!container) return; // hoppa ur funktionen om container saknas
+
     container.innerHTML = ""; // rensa ev gammalt innehåll
 
     // loopa igenom och skriv ut
@@ -68,5 +70,49 @@ function renderCv(list) {
         container.appendChild(div);
     });
 }
+
+// lägg till nytt jobb
+async function addWorkExperience(newWork) {
+    try {
+        // POST-anrop till API
+        await fetch(cvApi, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newWork)
+        });
+
+        document.getElementById("cvForm")?.reset(); // töm formuläret
+        alert("Erfarenhet sparad!")
+
+    } catch (error) {
+        // skriv ut fel i konsollen om misslyckas
+        console.error("POST error:", error);
+    }
+}
+
+// leta upp formulär i DOM
+const form = document.getElementById("cvForm");
+
+// Kolla att det finns på aktuell sida
+if (form) {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // skapa objekt av formulärdata
+        const newWork = {
+            company_name: document.getElementById("company_name").value,
+            job_title: document.getElementById("job_title").value,
+            start_date: document.getElementById("start_date").value,
+            end_date: document.getElementById("end_date").value || null,
+            description: document.getElementById("description").value
+        };
+
+        // skicka in till API:et
+        addWorkExperience(newWork);
+    });
+}
+
 // kör när sidan laddas
-getCv();
+if (document.getElementById("cv")) {
+    getCv();
+}
