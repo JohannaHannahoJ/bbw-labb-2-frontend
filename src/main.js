@@ -98,12 +98,24 @@ if (form) {
 
         // skapa objekt av formulärdata
         const newWork = {
-            company_name: document.getElementById("company_name").value,
-            job_title: document.getElementById("job_title").value,
+            company_name: document.getElementById("company_name").value.trim(),
+            job_title: document.getElementById("job_title").value.trim(),
             start_date: document.getElementById("start_date").value,
             end_date: document.getElementById("end_date").value || null,
-            description: document.getElementById("description").value
+            description: document.getElementById("description").value.trim()
         };
+
+        // kolla att att fält är ifyllda
+        if (!newWork.company_name || !newWork.job_title || !newWork.start_date || !newWork.description) {
+            alert("Fyll i alla obligatoriska fält");
+            return;
+        }
+
+        // kolla att slutdatum inte är före starttadum
+        if (newWork.end_date && newWork.end_date < newWork.start_date) {
+            alert("Slutdatum kan inte vara före startdatum");
+            return;
+        }
 
         // skicka in till API:et
         addWorkExperience(newWork);
